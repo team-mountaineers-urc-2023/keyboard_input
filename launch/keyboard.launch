@@ -1,0 +1,37 @@
+<launch>
+	<!-- keyboard args -->
+	<arg name="cmd_vel_topic" default="/cmd_vel"/>
+	<arg name="selected_mode_topic" default="/selected_mode"/>
+	<arg name="enabled_service" default="/keyboard_enabled"/>
+	<arg name="drive_forward_service" default="/drive_direction"/>
+	<arg name="car_style_turning_service" default="/car_style_turning"/>
+	<arg name="frequency" default="10"/>
+	<arg name="turbo_multiplier" default="1"/>
+	<arg name="base_multiplier" default="0.5"/>
+	<arg name="enabled_on_start" default="True"/>
+
+	<!-- cmd_vel range args -->
+	<arg name="min_linear_speed" default="-2"/>
+	<arg name="max_linear_speed" default="2"/>
+	<arg name="min_angular_speed" default="-2"/>
+	<arg name="max_angular_speed" default="2"/>
+
+	<!-- launch keyboard input (translates keyboard to cmd_vel) -->
+	<node pkg="keyboard_input" name="keyboard_input"
+	type="kbd.py" output="screen" respawn="false">
+		<param name="cmd_vel_topic" value="$(arg cmd_vel_topic)"/>
+		<param name="selected_mode_topic" value="$(arg selected_mode_topic)"/>
+		<param name="enabled_service" value="$(arg enabled_service)"/>
+		<param name="drive_forward_service" value="$(arg drive_forward_service)"/>
+		<param name="car_style_turning_service" value="$(arg car_style_turning_service)"/>
+		<param name="frequency" value="$(arg frequency)"/>
+		<param name="turbo_multiplier" value="$(arg turbo_multiplier)"/>
+		<param name="base_multiplier" value="$(arg base_multiplier)"/>
+		<param name="enabled_on_start" value="$(arg enabled_on_start)"/>
+		
+		<param name="min_linear_speed" value="$(arg min_linear_speed)"/>
+		<param name="max_linear_speed" value="$(arg max_linear_speed)"/>
+		<param name="min_angular_speed" value="$(arg min_angular_speed)"/>
+		<param name="max_angular_speed" value="$(arg max_angular_speed)"/>
+	</node>
+</launch>
